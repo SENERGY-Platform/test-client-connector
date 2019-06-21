@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  test-client-connector:
+    container_name: test-client-connector
+    build: https://github.com/SENERGY-Platform/test-client-connector.git
+    image: test-client-connector
+    volumes:
+      - './test-client-connector/cc-lib:/usr/src/app/cc-lib'
