@@ -44,6 +44,10 @@ class SensorHandler(threading.Thread):
             )
             msg.data = json.dumps(payload)
             event = cc_lib.client.message.Envelope(self.__device, srv, msg)
-            logger.debug("sending:\n{}".format(event))
+            logger.info("sending event: '{}' - '{}Z'".format(
+                event.correlation_id,
+                datetime.datetime.utcnow().isoformat()
+            ))
+            logger.debug(event)
             self.__client.emmitEvent(event, asynchronous=True)
             time.sleep(config.Sensor.rate)

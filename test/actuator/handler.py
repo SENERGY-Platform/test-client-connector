@@ -17,7 +17,7 @@
 
 from ..logger import root_logger
 from .types import TestActuator
-import threading, cc_lib, json
+import threading, cc_lib, json, datetime
 
 
 logger = root_logger.getChild(__name__.split(".", 1)[-1])
@@ -33,7 +33,11 @@ class ActuatorHandler(threading.Thread):
         logger.info("starting actuator handler for '{}'".format(self.__device.id))
         while True:
             command = self.__client.receiveCommand()
-            logger.debug("received:\n'{}'".format(command))
+            logger.info("received command: '{}' - '{}Z'".format(
+                command.correlation_id,
+                datetime.datetime.utcnow().isoformat()
+            ))
+            logger.debug(command)
             try:
                 if command.message.data:
                     device_resp = self.__device.getService(command.service_uri, **json.loads(command.message.data))
@@ -47,5 +51,9 @@ class ActuatorHandler(threading.Thread):
                 logger.error("{}: could not parse command response data - {}".format(self.name, ex))
                 resp = cc_lib.client.message.Message(json.dumps({"status": 1}))
             command.message = resp
-            logger.debug("sending response:\n'{}'".format(command))
+            logger.info("sending response to: '{}' - '{}Z'".format(
+                command.correlation_id,
+                datetime.datetime.utcnow().isoformat()
+            ))
+            logger.debug(command)
             self.__client.sendResponse(command, asynchronous=True)
