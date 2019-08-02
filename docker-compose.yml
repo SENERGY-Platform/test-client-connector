@@ -7,3 +7,4 @@ services:
     image: test-client-connector
     volumes:
       - './test-client-connector/cc-lib:/usr/src/app/cc-lib'
+      - './test-client-connector/test.conf:/usr/src/app/test.conf'
