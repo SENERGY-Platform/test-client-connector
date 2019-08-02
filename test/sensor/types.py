@@ -20,7 +20,7 @@ from ..logger import root_logger
 import cc_lib
 
 
-logger = root_logger.getChild(__name__.split(".", 1)[-1])
+logger = root_logger.getChild(__name__.split(".", 1)[-1].rsplit(".", 1)[0])
 
 
 class PushReading(cc_lib.types.SensorService):
