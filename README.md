@@ -8,25 +8,29 @@ Don't clone this repo just use `docker-compose` with the following yaml snippet:
     version: "2"
 
     services:
-      test-client-connector:
-        container_name: test-client-connector
+      test-cc:
+        container_name: test-cc
         build: https://github.com/SENERGY-Platform/test-client-connector.git
-        image: test-client-connector
+        image: test-cc
         volumes:
-          - './test-client-connector/cc-lib:/usr/src/app/cc-lib'
-          - './test-client-connector/test.conf:/usr/src/app/test.conf'
+          - './test-cc/cc-lib:/usr/src/app/cc-lib'
+          - './test-cc/test.conf:/usr/src/app/test.conf'
 
 
 Run the below commands to start your test client-connector:
 
 `nano docker-compose.yml` <-- add the yaml snippet from above!
 
-`mkdir test-client-connector`
+`mkdir test-cc`
 
-`mkdir test-client-connector/cc-lib`
+`mkdir test-cc/cc-lib`
     
-`touch test-client-connector/test.conf`
+`touch test-cc/test.conf`
     
-`touch test-client-connector/cc-lib/connector.conf`
+`touch test-cc/cc-lib/connector.conf`
 
-`docker-compose up -d test-client-connector`
+`docker-compose build --no-cache test-cc`
+
+`docker-compose up -d test-cc`
+
+`docker logs -f test-cc`
