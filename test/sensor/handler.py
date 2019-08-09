@@ -43,7 +43,7 @@ class SensorHandler(threading.Thread):
                 timestamp='{}Z'.format(datetime.datetime.utcnow().isoformat())
             )
             msg.data = json.dumps(payload)
-            event = cc_lib.client.message.Envelope(self.__device, srv, msg)
+            event = cc_lib.client.message.EventEnvelope(self.__device, srv, msg)
             logger.info("sending event: '{}' - '{}Z'".format(
                 event.correlation_id,
                 datetime.datetime.utcnow().isoformat()
