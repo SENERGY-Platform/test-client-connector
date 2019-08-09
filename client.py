@@ -58,6 +58,8 @@ if __name__ == '__main__':
             try:
                 connector_client.initHub()
                 break
+            except cc_lib.client.HubNotFoundError:
+                pass
             except cc_lib.client.HubInitializationError:
                 time.sleep(5)
         while True:
