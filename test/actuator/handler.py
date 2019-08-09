@@ -56,5 +56,5 @@ class ActuatorHandler(threading.Thread):
                 datetime.datetime.utcnow().isoformat()
             ))
             logger.debug(command)
-            if command.completion_strategy is cc_lib.client.CompletionStrategy.pessimistic:
+            if command.completion_strategy == cc_lib.client.CompletionStrategy.pessimistic:
                 self.__client.sendResponse(command, asynchronous=True)
