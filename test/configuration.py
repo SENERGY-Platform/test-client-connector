@@ -16,7 +16,10 @@
 
 
 from simple_conf import configuration, section
-from os import getcwd
+from os import getcwd, makedirs
+from os.path import exists as path_exists
+
+user_dir = '{}/storage'.format(getcwd())
 
 
 @configuration
@@ -48,7 +51,10 @@ class TestConf:
         level = "info"
 
 
-config = TestConf('test.conf', getcwd())
+if not path_exists(user_dir):
+    makedirs(user_dir)
+
+config = TestConf('test.conf', user_dir)
 
 
 if not all(
