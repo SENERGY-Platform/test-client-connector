@@ -65,7 +65,7 @@ if not all(
                 config.Logger.level
         )
 ):
-    exit('Please provide information for test actuator and sensor')
+    exit('Please provide test actuator and sensor information')
 
 
 if not all((config.Senergy.dt_test_actuator, config.Senergy.dt_test_sensor)):
