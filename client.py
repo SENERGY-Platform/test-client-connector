@@ -44,9 +44,9 @@ def on_connect(client: cc_lib.client.Client):
 connector_client = cc_lib.client.Client()
 connector_client.setConnectClbk(on_connect)
 
-sensor_device = TestSensor(config.Sensor.id, config.Sensor.name, config.Sensor.enable)
+sensor_device = TestSensor(str(config.Sensor.id), str(config.Sensor.name), config.Sensor.enable)
 device_manager.add(sensor_device)
-actuator_device = TestActuator(config.Actuator.id, config.Actuator.name, config.Actuator.enable)
+actuator_device = TestActuator(str(config.Actuator.id), str(config.Actuator.name), config.Actuator.enable)
 device_manager.add(actuator_device)
 
 sensor_handler = SensorHandler(sensor_device, connector_client)
