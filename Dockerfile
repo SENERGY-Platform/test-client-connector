@@ -7,7 +7,6 @@ WORKDIR /usr/src/app
 
 RUN apk update && apk upgrade && apk add --no-cache git
 
-COPY requirements.txt ./
 RUN pip install git+https://github.com/SENERGY-Platform/client-connector-lib.git@$BRANCH
 
 COPY . .
