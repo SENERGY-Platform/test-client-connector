@@ -3,7 +3,7 @@ test-client-connector
 
 #### Setup
 
-Don't clone this repo just use `docker-compose` with the following yaml snippet:
+Use `docker-compose` with the following yaml snippet:
 
     version: "2"
 
