@@ -19,8 +19,6 @@ Don't clone this repo just use `docker-compose` with the following yaml snippet:
 
 Run the below commands to start your test client-connector:
 
-`nano docker-compose.yml` <-- add the yaml snippet from above!
-
 `docker-compose up -d test-cc`
 
 `docker logs -f test-cc`
