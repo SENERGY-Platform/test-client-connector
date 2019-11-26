@@ -45,13 +45,13 @@ connector_client = cc_lib.client.Client()
 connector_client.setConnectClbk(on_connect)
 
 if not config.Sensor.id:
-    config.Sensor.id = uuid.uuid4()
+    config.Sensor.id = "sensor-{}".format(uuid.uuid4())
 
 sensor_device = TestSensor(str(config.Sensor.id), str(config.Sensor.name), config.Sensor.enable)
 device_manager.add(sensor_device)
 
 if not config.Actuator.id:
-    config.Actuator.id = uuid.uuid4()
+    config.Actuator.id = "actuator-{}".format(uuid.uuid4())
 
 actuator_device = TestActuator(str(config.Actuator.id), str(config.Actuator.name), config.Actuator.enable)
 device_manager.add(actuator_device)
