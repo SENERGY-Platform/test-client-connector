@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 
 RUN apk update && apk upgrade && apk add --no-cache git
 
-RUN pip install git+https://github.com/SENERGY-Platform/client-connector-lib.git@$BRANCH
+RUN pip install --no-cache-dir git+https://github.com/SENERGY-Platform/client-connector-lib.git@$BRANCH
 
 COPY . .
 
