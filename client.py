@@ -22,7 +22,7 @@ from test.sensor.types import TestSensor
 from test.sensor.handler import SensorHandler
 from test.actuator.types import TestActuator
 from test.actuator.handler import ActuatorHandler
-import cc_lib, time
+import cc_lib, time, uuid
 
 
 logger = root_logger.getChild(__name__)
@@ -44,9 +44,16 @@ def on_connect(client: cc_lib.client.Client):
 connector_client = cc_lib.client.Client()
 connector_client.setConnectClbk(on_connect)
 
-sensor_device = TestSensor(config.Sensor.id, config.Sensor.name, config.Sensor.enable)
+if not config.Sensor.id:
+    config.Sensor.id = "sensor-{}".format(uuid.uuid4())
+
+sensor_device = TestSensor(str(config.Sensor.id), str(config.Sensor.name), config.Sensor.enable)
 device_manager.add(sensor_device)
-actuator_device = TestActuator(config.Actuator.id, config.Actuator.name, config.Actuator.enable)
+
+if not config.Actuator.id:
+    config.Actuator.id = "actuator-{}".format(uuid.uuid4())
+
+actuator_device = TestActuator(str(config.Actuator.id), str(config.Actuator.name), config.Actuator.enable)
 device_manager.add(actuator_device)
 
 sensor_handler = SensorHandler(sensor_device, connector_client)

@@ -23,10 +23,8 @@ import cc_lib
 logger = root_logger.getChild(__name__.split(".", 1)[-1].rsplit(".", 1)[0])
 
 
-class PushReading(cc_lib.types.SensorService):
-    uri = config.Senergy.st_push_reading
-    name = "Push Reading"
-    description = "Push generated values."
+class PushReading(cc_lib.types.Service):
+    local_id = "pushReading"
 
     @staticmethod
     def task(value, timestamp):
@@ -38,9 +36,8 @@ class PushReading(cc_lib.types.SensorService):
 
 
 class TestSensor(cc_lib.types.Device):
-    uri = config.Senergy.dt_test_sensor
-    description = "Device type for test sensor."
-    services = {"pushReading": PushReading}
+    device_type_id = config.Senergy.dt_test_sensor
+    services = (PushReading, )
 
     def __init__(self, id: str, name: str, enabled: bool):
         self.id = id

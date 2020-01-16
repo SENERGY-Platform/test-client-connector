@@ -42,9 +42,6 @@ class TestConf:
     class Senergy:
         dt_test_actuator = None
         dt_test_sensor = None
-        st_print_time = None
-        st_print_values = None
-        st_push_reading = None
 
     @section
     class Logger:
@@ -68,15 +65,8 @@ if not all(
                 config.Logger.level
         )
 ):
-    exit('Please provide information for test actuator and sensor')
+    exit('Please provide test actuator and sensor information')
 
 
-if not all(
-        (
-                config.Senergy.dt_test_actuator,
-                config.Senergy.dt_test_sensor,
-                config.Senergy.st_print_time,
-                config.Senergy.st_push_reading
-        )
-):
+if not all((config.Senergy.dt_test_actuator, config.Senergy.dt_test_sensor)):
     exit('Please provide a SENERGY device and service types')

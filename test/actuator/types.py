@@ -23,10 +23,8 @@ import cc_lib, datetime
 logger = root_logger.getChild(__name__.split(".", 1)[-1].rsplit(".", 1)[0])
 
 
-class PrintTime(cc_lib.types.ActuatorService):
-    uri = config.Senergy.st_print_time
-    name = "Print Time"
-    description = "Print time to local console."
+class PrintTime(cc_lib.types.Service):
+    local_id = "printTime"
 
     @staticmethod
     def task():
@@ -34,10 +32,8 @@ class PrintTime(cc_lib.types.ActuatorService):
         return {"status": 0}
 
 
-class PrintValues(cc_lib.types.ActuatorService):
-    uri = config.Senergy.st_print_values
-    name = "Print Values"
-    description = "Print values provided by user."
+class PrintValues(cc_lib.types.Service):
+    local_id = "printValues"
 
     @staticmethod
     def task(val_a: str, val_b: str):
@@ -46,12 +42,8 @@ class PrintValues(cc_lib.types.ActuatorService):
 
 
 class TestActuator(cc_lib.types.Device):
-    uri = config.Senergy.dt_test_actuator
-    description = "Device type for test actuator."
-    services = {
-        "printTime": PrintTime,
-        "printValues": PrintValues
-    }
+    device_type_id = config.Senergy.dt_test_actuator
+    services = (PrintTime, PrintValues)
 
     def __init__(self, id: str, name: str, enabled: bool):
         self.id = id
